@@ -1,0 +1,152 @@
+{
+    "type": "Feature",
+    "properties": {
+        "mag": 1.4,
+        "place": "56 km S of Silver Peak, Nevada",
+        "time": 1691952566610,
+        "updated": 1691952717219,
+        "tz": null,
+        "url": "https://earthquake.usgs.gov/earthquakes/eventpage/nn00864394",
+        "felt": null,
+        "cdi": null,
+        "mmi": null,
+        "alert": null,
+        "status": "automatic",
+        "tsunami": 0,
+        "sig": 30,
+        "net": "nn",
+        "code": "00864394",
+        "ids": ",nn00864394,",
+        "sources": ",nn,",
+        "types": ",origin,phase-data,",
+        "nst": 16,
+        "dmin": 0.022,
+        "rms": 0.39,
+        "gap": 113.39,
+        "magType": "ml",
+        "type": "earthquake",
+        "title": "M 1.4 - 56 km S of Silver Peak, Nevada",
+        "products": {
+            "origin": [
+                {
+                    "indexid": "3109048",
+                    "indexTime": 1691952720201,
+                    "id": "urn:usgs-product:nn:origin:nn00864394:1691952717219",
+                    "type": "origin",
+                    "code": "nn00864394",
+                    "source": "nn",
+                    "updateTime": 1691952717219,
+                    "status": "UPDATE",
+                    "properties": {
+                        "azimuthal-gap": "113.39",
+                        "depth": "7.7",
+                        "evaluation-status": "preliminary",
+                        "event-type": "earthquake",
+                        "eventParametersPublicID": "quakeml:edu.unr.seismo/AddAction/1691952717219167#event=864394",
+                        "eventsource": "nn",
+                        "eventsourcecode": "00864394",
+                        "eventtime": "2023-08-13T18:49:26.610Z",
+                        "latitude": "37.2462",
+                        "longitude": "-117.6241",
+                        "magnitude": "1.4",
+                        "magnitude-error": "0.87",
+                        "magnitude-num-stations-used": "12",
+                        "magnitude-source": "NN",
+                        "magnitude-type": "ml",
+                        "minimum-distance": "0.022",
+                        "num-phases-used": "16",
+                        "num-stations-used": "16",
+                        "origin-source": "NN",
+                        "quakeml-magnitude-publicid": "quakeml:edu.unr.seismo/netmag/662450",
+                        "quakeml-origin-publicid": "quakeml:edu.unr.seismo/origin/2192795",
+                        "quakeml-publicid": "quakeml:edu.unr.seismo/event/864394",
+                        "review-status": "automatic",
+                        "standard-error": "0.39",
+                        "title": "56 km S of Silver Peak, Nevada",
+                        "version": "864394",
+                        "vertical-error": "0.6"
+                    },
+                    "preferredWeight": 7,
+                    "contents": {
+                        "contents.xml": {
+                            "contentType": "application/xml",
+                            "lastModified": 1691952718000,
+                            "length": 195,
+                            "url": "https://earthquake.usgs.gov/realtime/product/origin/nn00864394/nn/1691952717219/contents.xml"
+                        },
+                        "quakeml.xml": {
+                            "contentType": "application/xml",
+                            "lastModified": 1691952717000,
+                            "length": 2825,
+                            "url": "https://earthquake.usgs.gov/realtime/product/origin/nn00864394/nn/1691952717219/quakeml.xml"
+                        }
+                    }
+                }
+            ],
+            "phase-data": [
+                {
+                    "indexid": "3109049",
+                    "indexTime": 1691952720529,
+                    "id": "urn:usgs-product:nn:phase-data:nn00864394:1691952717219",
+                    "type": "phase-data",
+                    "code": "nn00864394",
+                    "source": "nn",
+                    "updateTime": 1691952717219,
+                    "status": "UPDATE",
+                    "properties": {
+                        "azimuthal-gap": "113.39",
+                        "depth": "7.7",
+                        "evaluation-status": "preliminary",
+                        "event-type": "earthquake",
+                        "eventParametersPublicID": "quakeml:edu.unr.seismo/AddAction/1691952717219167#event=864394",
+                        "eventsource": "nn",
+                        "eventsourcecode": "00864394",
+                        "eventtime": "2023-08-13T18:49:26.610Z",
+                        "latitude": "37.2462",
+                        "longitude": "-117.6241",
+                        "magnitude": "1.4",
+                        "magnitude-error": "0.87",
+                        "magnitude-num-stations-used": "12",
+                        "magnitude-source": "NN",
+                        "magnitude-type": "ml",
+                        "minimum-distance": "0.022",
+                        "num-phases-used": "16",
+                        "num-stations-used": "16",
+                        "origin-source": "NN",
+                        "quakeml-magnitude-publicid": "quakeml:edu.unr.seismo/netmag/662450",
+                        "quakeml-origin-publicid": "quakeml:edu.unr.seismo/origin/2192795",
+                        "quakeml-publicid": "quakeml:edu.unr.seismo/event/864394",
+                        "review-status": "automatic",
+                        "standard-error": "0.39",
+                        "version": "864394",
+                        "vertical-error": "0.6"
+                    },
+                    "preferredWeight": 7,
+                    "contents": {
+                        "contents.xml": {
+                            "contentType": "application/xml",
+                            "lastModified": 1691952718000,
+                            "length": 195,
+                            "url": "https://earthquake.usgs.gov/realtime/product/phase-data/nn00864394/nn/1691952717219/contents.xml"
+                        },
+                        "quakeml.xml": {
+                            "contentType": "application/xml",
+                            "lastModified": 1691952717000,
+                            "length": 34810,
+                            "url": "https://earthquake.usgs.gov/realtime/product/phase-data/nn00864394/nn/1691952717219/quakeml.xml"
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "geometry": {
+        "type": "Point",
+        "coordinates": [
+            -117.6241,
+            37.2462,
+            7.7
+        ]
+    },
+    "id": "nn00864394"
+}

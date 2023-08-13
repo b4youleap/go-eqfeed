@@ -2,10 +2,14 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"time"
 
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"net/http"
+
+	"github.com/gorilla/feeds"
 )
 
 type EQ struct {
@@ -69,24 +73,50 @@ func main() {
 	url := "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
 	resp, err := http.Get(url)
 	if err != nil {
-		fmt.Println("Error fetching data:", err)
-		return
+		log.Fatal("Error fetching data:", err) // https://pkg.go.dev/log#Fatal
 	}
 	defer resp.Body.Close()
 
-	body, err := ioutil.ReadAll(resp.Body)
+	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		fmt.Println("Error reading response body:", err)
-		return
+		log.Fatal("Error reading response body:", err)
 	}
 
 	var eqData EQ
 	err = json.Unmarshal(body, &eqData)
 	if err != nil {
-		fmt.Println("Error unmarshaling JSON:", err)
-		return
+		log.Fatal("Error unmarshaling JSON:", err)
 	}
 
-	fmt.Printf("EQ data: %+v\n", eqData)
+	resp.Body.Close()
+
+	feed := &feeds.Feed{
+		Title:       eqData.Metadata.Title,
+		Link:        &feeds.Link{Href: url},
+		Description: "USGS Earthquake Hazards Program, responsible for monitoring, reporting, and researching earthquakes and earthquake hazards",
+		Author:      &feeds.Author{Name: "USGS", Email: "eq_questions@usgs.gov"},
+		Created:     time.Now(),
+	}
+
+	for _, earthquake := range eqData.Features {
+
+		eqDate := time.UnixMilli(earthquake.Properties.Updated) // https://pkg.go.dev/time#Parse
+
+		item := &feeds.Item{
+			Title:   earthquake.Properties.Title,
+			Link:    &feeds.Link{Href: earthquake.Properties.URL},
+			Created: eqDate,
+		}
+
+		feed.Items = append(feed.Items, item)
+
+	}
+
+	rss, err := feed.ToRss()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(rss)
 
 }
