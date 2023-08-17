@@ -70,6 +70,9 @@ type Metadata struct {
 
 func main() {
 
+	const baseLongitude = -155.28303
+	const baseLatitude = 19.40575
+
 	url := "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
 	resp, err := http.Get(url)
 	if err != nil {
@@ -100,15 +103,23 @@ func main() {
 
 	for _, earthquake := range eqData.Features {
 
+		// collect coordinates for filtering
+		eqLon := earthquake.Geometry.Coordinates[0]
+		eqLat := earthquake.Geometry.Coordinates[1]
+		eqDepth := earthquake.Geometry.Coordinates[2]
+
 		eqDate := time.UnixMilli(earthquake.Properties.Updated) // https://pkg.go.dev/time#Parse
 
 		item := &feeds.Item{
-			Title:   earthquake.Properties.Title,
-			Link:    &feeds.Link{Href: earthquake.Properties.URL},
-			Created: eqDate,
+			Title:       earthquake.Properties.Title,
+			Link:        &feeds.Link{Href: earthquake.Properties.URL},
+			Description: fmt.Sprintf("Magnitude: %v, Depth: %v, Date: %v", earthquake.Properties.Mag, eqDepth, eqDate),
+			Created:     eqDate,
 		}
 
-		feed.Items = append(feed.Items, item)
+		if eqLon >= baseLongitude-2 && eqLon <= baseLongitude+2 && eqLat >= baseLatitude-2 && eqLat <= baseLatitude+2 {
+			feed.Items = append(feed.Items, item)
+		}
 
 	}
 
