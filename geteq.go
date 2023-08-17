@@ -53,7 +53,7 @@ type Properties struct {
 	Nst     int64       `json:"nst"`
 	Dmin    float64     `json:"dmin"`
 	RMS     float64     `json:"rms"`
-	Gap     int64       `json:"gap"`
+	Gap     float64     `json:"gap"`
 	MagType string      `json:"magType"`
 	Type    string      `json:"type"`
 	Title   string      `json:"title"`
@@ -73,7 +73,7 @@ func main() {
 	const baseLongitude = -155.28303
 	const baseLatitude = 19.40575
 
-	url := "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson"
+	url := "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Fatal("Error fetching data:", err) // https://pkg.go.dev/log#Fatal
