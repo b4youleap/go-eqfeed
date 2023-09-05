@@ -12,6 +12,8 @@ import (
 	"github.com/gorilla/feeds"
 )
 
+// for version 1.15.15 change the above "io" import to "io/ioutil"
+
 type EQ struct {
 	Type     string    `json:"type"`
 	Metadata Metadata  `json:"metadata"`
@@ -73,6 +75,8 @@ func main() {
 	const baseLongitude = -155.28303
 	const baseLatitude = 19.40575
 
+	// tzone := time.FixedZone("UST-10", -10*60*60) // uncomment for v1.15.15
+
 	url := "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson"
 	resp, err := http.Get(url)
 	if err != nil {
@@ -80,7 +84,8 @@ func main() {
 	}
 	defer resp.Body.Close()
 
-	body, err := io.ReadAll(resp.Body)
+	// body, err := ioutil.ReadAll(resp.Body) // uncomment for v1.15.15
+	body, err := io.ReadAll(resp.Body) // comment this line to use v1.15.15
 	if err != nil {
 		log.Fatal("Error reading response body:", err)
 	}
@@ -108,13 +113,18 @@ func main() {
 		eqLat := earthquake.Geometry.Coordinates[1]
 		eqDepth := earthquake.Geometry.Coordinates[2]
 
+		// eqDate := time.Unix(earthquake.Properties.Updated/1000, 0) // uncomment for v1.15.15 and comment the following line
 		eqDate := time.UnixMilli(earthquake.Properties.Updated) // https://pkg.go.dev/time#Parse
+
+		// tzEQDate := eqDate.In(tzone) // uncomment for v1.15.15
 
 		item := &feeds.Item{
 			Title:       earthquake.Properties.Title,
 			Link:        &feeds.Link{Href: earthquake.Properties.URL},
 			Description: fmt.Sprintf("Magnitude: %v, Depth: %v, Date: %v", earthquake.Properties.Mag, eqDepth, eqDate),
-			Created:     eqDate,
+			// Description: fmt.Sprintf("Magnitude: %v, Depth: %v, Date: %v", earthquake.Properties.Mag, eqDepth, tzEQDate), // comment the line above and uncomment this line for v1.15.15
+			Created: eqDate,
+			// Created:     eqDate, // comment the line above and uncomment this line for v1.15.15
 		}
 
 		if eqLon >= baseLongitude-2 && eqLon <= baseLongitude+2 && eqLat >= baseLatitude-2 && eqLat <= baseLatitude+2 {
